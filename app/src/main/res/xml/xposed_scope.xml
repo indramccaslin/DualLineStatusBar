@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    xposed_scope.xml - Mendefinisikan scope LSPosed untuk DualLineStatusBar
+    Modul ini hanya akan aktif/di-inject ke dalam proses com.android.systemui
+    Hal ini penting untuk keamanan dan performa - tidak perlu inject ke semua proses
+-->
+<resources>
+    <!-- Daftar package yang akan di-hook oleh modul ini -->
+    <string-array name="xposedscope">
+        <!-- SystemUI - target utama untuk modifikasi status bar -->
+        <item>com.android.systemui</item>
+    </string-array>
+</resources>

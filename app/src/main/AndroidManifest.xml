@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    AndroidManifest.xml - DualLineStatusBar Xposed Module
+    Manifest utama untuk modul LSPosed yang memodifikasi status bar Android
+    Target: Android 15 (API 35), minimum Android 12 (API 31)
+    Scope: com.android.systemui
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dualline.statusbar"
+    android:versionCode="1"
+    android:versionName="1.0.0">
+
+    <uses-sdk
+        android:minSdkVersion="31"
+        android:targetSdkVersion="34" />
+
+    <!-- Permission untuk membaca/menulis SharedPreferences lintas proses -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.DeviceDefault.DayNight">
+
+        <!--
+            Meta-data wajib untuk LSPosed/Xposed Framework:
+            1. xposedmodule       - menandai ini adalah modul Xposed
+            2. xposeddescription  - deskripsi modul
+            3. xposedminversion   - versi Xposed API minimum yang dibutuhkan
+            4. xposedscope        - package target yang akan di-hook (dibaca LSPosed)
+        -->
+
+        <!-- Tandai sebagai modul Xposed -->
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+
+        <!-- Deskripsi modul yang ditampilkan di LSPosed Manager -->
+        <meta-data
+            android:name="xposeddescription"
+            android:value="Membuat status bar Android menampilkan dua baris: baris atas menampilkan jam dan tanggal, baris bawah menampilkan ikon notifikasi dan indikator sistem." />
+
+        <!-- Versi minimum Xposed API yang dibutuhkan (82 = API terbaru stabil) -->
+        <meta-data
+            android:name="xposedminversion"
+            android:value="82" />
+
+        <!-- Scope LSPosed: hanya hook com.android.systemui -->
+        <meta-data
+            android:name="xposedscope"
+            android:resource="@xml/xposed_scope" />
+
+        <!--
+            SettingsActivity - UI pengaturan modul
+            Dapat dibuka dari LSPosed Manager via intent
+        -->
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:exported="true"
+            android:label="@string/settings_title"
+            android:theme="@android:style/Theme.DeviceDefault.DayNight">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- Intent untuk dibuka dari LSPosed Manager -->
+            <intent-filter>
+                <action android:name="android.intent.action.APPLICATION_PREFERENCES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

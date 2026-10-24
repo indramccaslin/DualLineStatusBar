@@ -1,0 +1,16 @@
+// Root build.gradle - DualLineStatusBar Xposed Module
+// Build script untuk modul LSPosed DualLineStatusBar
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.2'
+    }
+}
+
+tasks.register('clean', Delete) {
+    delete rootProject.layout.buildDirectory
+}

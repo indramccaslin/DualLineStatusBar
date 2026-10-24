@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- HEADER -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DualLine StatusBar"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Konfigurasi Lengkap Status Bar 2 Baris (LSPosed)"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ACTION BUTTONS -->
+        <Button
+            android:id="@+id/btn_restart_systemui"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="⚡ Terapkan &amp; Restart SystemUI"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_reset_defaults"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:text="🔄 Reset ke Pengaturan Standar"
+            android:textSize="13sp"
+            android:layout_marginBottom="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginBottom="16dp" />
+
+        <!-- MASTER SWITCH -->
+        <Switch
+            android:id="@+id/switch_enable_dual_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aktifkan Dual Line Status Bar"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Memecah status bar menjadi 2 baris atas &amp; bawah"
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="20dp" />
+
+        <!-- ============================================== -->
+        <!-- SECTION 1: JAM (LINE 1 KIRI) -->
+        <!-- ============================================== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🕒 JAM (Line 1 Kiri)"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/colorAccent"
+            android:layout_marginBottom="10dp" />
+
+        <Switch
+            android:id="@+id/switch_clock_seconds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tampilkan Detik (HH:mm:ss)"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
+
+        <Switch
+            android:id="@+id/switch_clock_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cetak Tebal (Bold)"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Format Jam:"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginTop="8dp" />
+
+        <Spinner
+            android:id="@+id/spinner_clock_format"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ukuran Font Jam:"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <Spinner
+            android:id="@+id/spinner_clock_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
+
+        <!-- ============================================== -->
+        <!-- SECTION 2: TANGGAL (LINE 2 KIRI) -->
+        <!-- ============================================== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📅 TANGGAL (Line 2 Kiri)"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/colorAccent"
+            android:layout_marginBottom="10dp" />
+
+        <Switch
+            android:id="@+id/switch_date_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tampilkan Tanggal"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
+
+        <Switch
+            android:id="@+id/switch_date_bold_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tebalkan Nama Hari"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Format Tanggal:"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginTop="8dp" />
+
+        <Spinner
+            android:id="@+id/spinner_date_format"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Posisi / Perataan Tanggal:"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <Spinner
+            android:id="@+id/spinner_date_alignment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ukuran Font Tanggal:"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <Spinner
+            android:id="@+id/spinner_date_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
+
+        <!-- ============================================== -->
+        <!-- SECTION 3: NOTIFIKASI (LINE 2 KIRI) -->
+        <!-- ============================================== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🔔 IKON NOTIFIKASI (Line 2 Kiri)"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/colorAccent"
+            android:layout_marginBottom="10dp" />
+
+        <Switch
+            android:id="@+id/switch_notif_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tampilkan Notifikasi di Line 2"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ukuran / Skala Ikon Notifikasi:"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginTop="8dp" />
+
+        <Spinner
+            android:id="@+id/spinner_notif_scale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
+
+        <!-- ============================================== -->
+        <!-- SECTION 4: SUHU CPU & BATERAI (LINE 1 KANAN) -->
+        <!-- ============================================== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🌡️ SUHU CPU &amp; BATERAI (Line 1 Kanan)"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/colorAccent"
+            android:layout_marginBottom="10dp" />
+
+        <Switch
+            android:id="@+id/switch_thermal_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tampilkan Info Suhu"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bentuk Tampilan Suhu:"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginTop="8dp" />
+
+        <Spinner
+            android:id="@+id/spinner_thermal_format"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jarak Spasi Antara CPU &amp; Baterai:"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <Spinner
+            android:id="@+id/spinner_thermal_spacing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Interval Pembaruan Suhu:"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <Spinner
+            android:id="@+id/spinner_thermal_interval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ukuran Font Suhu:"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <Spinner
+            android:id="@+id/spinner_thermal_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp" />
+
+        <!-- ============================================== -->
+        <!-- SECTION 5: SINYAL, NETWORK & BATERAI -->
+        <!-- ============================================== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📶 SINYAL, NETWORK &amp; BATERAI"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/colorAccent"
+            android:layout_marginBottom="10dp" />
+
+        <Switch
+            android:id="@+id/switch_net_traffic_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tampilkan Network Speed (Line 2)"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ukuran Ikon Baterai:"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginTop="8dp" />
+
+        <Spinner
+            android:id="@+id/spinner_battery_scale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ukuran Ikon Sinyal &amp; Wi-Fi:"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <Spinner
+            android:id="@+id/spinner_status_scale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="💡 Tips: Klik tombol 'Terapkan &amp; Restart SystemUI' di bagian paling atas untuk langsung melihat perubahan seketika tanpa reboot HP."
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="40dp" />
+
+    </LinearLayout>
+</ScrollView>

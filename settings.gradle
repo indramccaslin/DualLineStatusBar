@@ -1,0 +1,21 @@
+// settings.gradle - Konfigurasi project DualLineStatusBar
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        // Repository Xposed API
+        maven { url 'https://api.xposed.info/' }
+    }
+}
+
+rootProject.name = "DualLineStatusBar"
+include ':app'

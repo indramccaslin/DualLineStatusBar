@@ -1,0 +1,64 @@
+// app/build.gradle - Konfigurasi build modul DualLineStatusBar
+// Target Android 15 (API 35), minimum Android 12 (API 31)
+
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.dualline.statusbar'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.dualline.statusbar'
+        minSdk 31
+        targetSdk 35
+        versionCode 1
+        versionName "1.0.0"
+
+        // Nama modul untuk ditampilkan di LSPosed Manager
+        resValue "string", "app_name", "DualLine StatusBar"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            // Jangan obfuscate - bisa mempengaruhi hook
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    // Packaging untuk menghindari konflik
+    packaging {
+        resources {
+            excludes += ['/META-INF/{AL2.0,LGPL2.1}', 'META-INF/DEPENDENCIES']
+        }
+    }
+}
+
+dependencies {
+    // Xposed API - wajib untuk modul LSPosed
+    // 'compileOnly' agar tidak di-bundle ke APK (sudah tersedia di system)
+    compileOnly 'de.robv.android.xposed:api:82'
+    // Sources untuk IDE support (opsional tapi membantu development)
+    // Gunakan 'api' hanya jika kamu membangun library, bukan app
+    // Untuk app module, gunakan compileOnly
+    compileOnly 'de.robv.android.xposed:api:82:sources'
+
+    // AndroidX untuk SettingsActivity
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.preference:preference:1.2.1'
+    implementation 'com.google.android.material:material:1.11.0'
+}
