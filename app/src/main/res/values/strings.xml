@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     strings.xml - String resources untuk DualLineStatusBar
-    Mendefinisikan semua teks yang digunakan oleh UI
+    Label UI pengaturan memakai teks langsung di activity_settings.xml.
 -->
 <resources>
     <!-- Nama aplikasi -->
@@ -9,41 +9,4 @@
 
     <!-- Judul halaman pengaturan -->
     <string name="settings_title">Pengaturan DualLine StatusBar</string>
-
-    <!-- Label untuk format jam -->
-    <string name="pref_time_format_title">Format Jam</string>
-    <string name="pref_time_format_summary">Pilih format tampilan jam</string>
-
-    <!-- Label untuk format tanggal -->
-    <string name="pref_date_format_title">Format Tanggal</string>
-    <string name="pref_date_format_summary">Pilih format tampilan tanggal</string>
-
-    <!-- Array pilihan format jam -->
-    <string-array name="time_format_entries">
-        <item>24 Jam (14:35)</item>
-        <item>12 Jam (2:35 PM)</item>
-        <item>24 Jam tanpa detik (14:35)</item>
-    </string-array>
-
-    <string-array name="time_format_values">
-        <item>HH:mm</item>
-        <item>h:mm a</item>
-        <item>HH:mm</item>
-    </string-array>
-
-    <!-- Array pilihan format tanggal -->
-    <string-array name="date_format_entries">
-        <item>Sab, 24 Okt (EEE, dd MMM)</item>
-        <item>Sabtu, 24 Oktober (EEEE, dd MMMM)</item>
-        <item>24/10/2026 (dd/MM/yyyy)</item>
-        <item>2026-10-24 (yyyy-MM-dd)</item>
-    </string-array>
-
-    <string-array name="date_format_values">
-        <item>EEE, dd MMM</item>
-        <item>EEEE, dd MMMM</item>
-        <item>dd/MM/yyyy</item>
-        <item>yyyy-MM-dd</item>
-    </string-array>
-
 </resources>

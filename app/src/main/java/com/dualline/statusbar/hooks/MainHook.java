@@ -65,16 +65,6 @@ public class MainHook implements IXposedHookLoadPackage {
         }
 
         try {
-            // Aktifkan hook untuk area notifikasi (wrap ke baris kedua)
-            NotificationHook notificationHook = new NotificationHook();
-            notificationHook.initHooks(lpparam);
-            XposedBridge.log(TAG + ": NotificationHook berhasil diinisialisasi");
-        } catch (Throwable t) {
-            XposedBridge.log(TAG + ": Gagal menginisialisasi NotificationHook: " + t.getMessage());
-            XposedBridge.log(t);
-        }
-
-        try {
             // Aktifkan hook untuk NetworkTraffic widget (2 baris kompak, pas dengan baterai)
             NetworkTrafficHook networkTrafficHook = new NetworkTrafficHook();
             networkTrafficHook.initHooks(lpparam);

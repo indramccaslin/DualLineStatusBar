@@ -45,6 +45,9 @@ public class ModulePrefs {
     public static final String KEY_THERMAL_INTERVAL = "pref_thermal_interval"; // int: 1, 2, 5
     public static final String KEY_THERMAL_SIZE_DP = "pref_thermal_size_dp"; // float: 5.0f, 5.8f, 6.5f
 
+    // === 5b. INFO RAM (LINE 1) ===
+    public static final String KEY_MEM_SHOW = "pref_mem_show";
+
     // === 6. NETWORK TRAFFIC & STATUS ICONS (LINE 2 & LINE 1 KANAN) ===
     public static final String KEY_NET_TRAFFIC_SHOW = "pref_net_traffic_show";
     public static final String KEY_BATTERY_SCALE = "pref_battery_scale";   // float: 0.70f, 0.80f, 1.0f

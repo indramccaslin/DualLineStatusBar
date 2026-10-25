@@ -1,5 +1,5 @@
 # DualLineStatusBar 🚀
-> **Modul LSPosed / Xposed untuk Android 15 & 17 (AOSP / Project Infinity X)**
+> **v1.1.0 — Modul LSPosed / Xposed untuk Android 15 & 17 (AOSP / Project Infinity X)**
 
 DualLineStatusBar mengubah status bar Android standar (1 baris) menjadi **2 baris (Dual Line)** yang simetris, rapi, dan dapat dikustomisasi secara penuh melalui antarmuka aplikasi bawaan.
 
@@ -8,13 +8,13 @@ DualLineStatusBar mengubah status bar Android standar (1 baris) menjadi **2 bari
 ## 📱 Tampilan Tata Letak Status Bar
 
 ```text
-[ Line 1 ] : [ 20:49:18 ]  [ CPU 50°  BAT 50° ]                [ 📶 WiFi ]
+[ Line 1 ] : [ 20:49:18 ]  [ CPU 50°  BAT 50°  RAM 47% ]       [ 📶 WiFi ]
 [ Line 2 ] : [ Sab, 24 Okt ]  [ 🔔 💬 ... ]        [ ↕ 0.00 KB/s ] [ 🔋 ]
 ```
 
 ### Pembagian Elemen:
 - **Line 1 (Atas):**
-  - **Kiri:** Jam (`HH:mm:ss`) berdampingan dengan Suhu CPU & Baterai (`CPU 50°  BAT 50°`).
+  - **Kiri:** Jam (`HH:mm:ss`) berdampingan dengan Suhu CPU, Suhu Baterai, dan Info RAM (`CPU 50°  BAT 50°  RAM 47%`).
   - **Kanan:** Indikator Sinyal Seluler & Wi-Fi (`StatusIconContainer`).
 - **Line 2 (Bawah):**
   - **Kiri:** Tanggal (`Sab, 24 Okt`) berdampingan dengan deretan Ikon Notifikasi.
@@ -29,12 +29,13 @@ DualLineStatusBar mengubah status bar Android standar (1 baris) menjadi **2 bari
    - Penjajaran vertikal dan padding otomatis disesuaikan agar tidak ada teks atau ikon yang terpotong.
 2. **Stabilitas Posisi Jam & Tanggal:**
    - Jam dan tanggal ditempatkan dalam kolom terisolasi sehingga tidak bergeser saat notifikasi masuk atau dihapus.
-3. **Info Suhu Hardware Real-Time:**
+3. **Info Suhu & RAM Real-Time:**
    - Menampilkan suhu CPU (dari thermal zone) dan suhu baterai (dari BatteryManager) yang diperbarui secara berkala.
+   - Menampilkan persentase RAM terpakai (`RAM 47%`) di Line 1, diperbarui tiap 5 detik.
 4. **Network Traffic Terkalibrasi:**
    - Mengontrol ukuran dan layout indikator kecepatan transfer data bawaan ROM agar pas berdampingan dengan ikon baterai.
 5. **Aplikasi Pengaturan Lengkap (Settings UI):**
-   - Mengatur format jam (detik/tanpa detik, 12h/24h), format tanggal, posisi tanggal (center/start), bentuk suhu (1 baris/2 baris), skala ikon, dll.
+   - Mengatur format jam (detik/tanpa detik, 12h/24h), format tanggal, posisi tanggal (center/start), bentuk suhu (1 baris/2 baris), tampil/tidaknya info RAM, skala ikon, dll.
    - Dilengkapi tombol **"⚡ Terapkan & Restart SystemUI"** untuk menerapkan konfigurasi dalam sekali klik.
 
 ---
@@ -54,18 +55,16 @@ DualLineStatusBar/
 │   │   │   │   ├── MainHook.java     # Router IXposedHookLoadPackage
 │   │   │   │   ├── StatusBarHook.java# Penataan tata letak kiri & kanan dual-line
 │   │   │   │   ├── ClockHook.java    # Hook teks jam & detik
-│   │   │   │   ├── NetworkTrafficHook.java # Hook traffic meter
-│   │   │   │   └── NotificationHook.java   # Hook notifikasi
+│   │   │   │   └── NetworkTrafficHook.java # Hook traffic meter
 │   │   │   └── ui/
 │   │   │       ├── SettingsActivity.java   # UI pengaturan manual
 │   │   │       ├── ThermalView.java        # Widget suhu CPU & Baterai
+│   │   │       ├── MemView.java            # Widget info RAM
 │   │   │       └── DateView.java           # Widget tanggal otomatis
 │   │   └── res/
 │   │       ├── layout/activity_settings.xml# Layout antarmuka pengaturan
 │   │       ├── values/strings.xml
-│   │       └── xml/
-│   │           ├── module_prefs.xml
-│   │           └── xposed_scope.xml
+│   │       └── xml/xposed_scope.xml
 ├── build.gradle
 ├── settings.gradle
 └── README.md
@@ -80,7 +79,7 @@ DualLineStatusBar/
 - **Root:** Magisk / KernelSU / APatch
 
 ### Langkah Pemasangan:
-1. Unduh dan install file APK release (`DualLineStatusBar-release.apk`).
+1. Unduh dan install file APK release (`DualLineStatusBar-1.1.0.apk`).
 2. Buka aplikasi **LSPosed Manager**.
 3. Aktifkan modul **DualLineStatusBar** dan pastikan scope **System Framework** / **System UI** dicentang.
 4. Restart SystemUI atau reboot perangkat.

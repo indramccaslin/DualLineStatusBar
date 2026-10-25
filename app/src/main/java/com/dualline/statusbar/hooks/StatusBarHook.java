@@ -1,7 +1,6 @@
 package com.dualline.statusbar.hooks;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.dualline.statusbar.ModulePrefs;
 import com.dualline.statusbar.ui.DateView;
+import com.dualline.statusbar.ui.MemView;
 import com.dualline.statusbar.ui.ThermalView;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -30,9 +30,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 public class StatusBarHook {
 
     private static final String TAG = "DualLineStatusBar/StatusBar";
-    private static final String PREFS_NAME = "dualline_prefs";
-    private static final String PREF_DUAL_LINE_ENABLED = "pref_dual_line_enabled";
-
     public void initHooks(XC_LoadPackage.LoadPackageParam lpparam) {
         try {
             Class<?> phoneStatusBarViewClass = XposedHelpers.findClass(
@@ -200,7 +197,7 @@ public class StatusBarHook {
 
             DateView dateView = new DateView(context);
             LinearLayout.LayoutParams dateLp = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             );
             dateLp.gravity = Gravity.CENTER;
@@ -249,6 +246,23 @@ public class StatusBarHook {
             thermalLp.gravity = Gravity.CENTER_VERTICAL | Gravity.START;
             thermalView.setLayoutParams(thermalLp);
             thermalRow1.addView(thermalView);
+
+            // Baris 1: Info RAM (di samping kanan suhu)
+            if (ModulePrefs.getBoolean(ModulePrefs.KEY_MEM_SHOW, true)) {
+                MemView memView = new MemView(context);
+                memView.setTag("dualline_mem_view");
+                memView.setTranslationY(1.5f * density);
+                LinearLayout.LayoutParams memLp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                memLp.gravity = Gravity.CENTER_VERTICAL | Gravity.START;
+                memLp.setMarginStart((int) (6 * density));
+                memView.setLayoutParams(memLp);
+                thermalRow1.addView(memView);
+                XposedBridge.log(TAG + ": Info RAM ditambahkan ke Line 1.");
+            }
+
             secondStack.addView(thermalRow1);
 
             // Baris 2: Ikon Notifikasi (Line 2 di samping kanan tanggal)
@@ -521,15 +535,4 @@ public class StatusBarHook {
         return "";
     }
 
-    private boolean isDualLineEnabled(Context context) {
-        try {
-            SharedPreferences prefs = context.createPackageContext(
-                "com.dualline.statusbar",
-                Context.CONTEXT_IGNORE_SECURITY
-            ).getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            return prefs.getBoolean(PREF_DUAL_LINE_ENABLED, true);
-        } catch (Throwable t) {
-            return true;
-        }
-    }
 }

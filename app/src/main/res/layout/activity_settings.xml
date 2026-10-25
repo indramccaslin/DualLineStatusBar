@@ -307,6 +307,15 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp" />
 
+        <Switch
+            android:id="@+id/switch_mem_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tampilkan Info RAM (Line 1)"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
+
         <!-- ============================================== -->
         <!-- SECTION 5: SINYAL, NETWORK & BATERAI -->
         <!-- ============================================== -->
