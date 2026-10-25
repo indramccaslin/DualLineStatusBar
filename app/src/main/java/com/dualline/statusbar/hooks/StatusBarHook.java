@@ -257,7 +257,6 @@ public class StatusBarHook {
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 );
                 memLp.gravity = Gravity.CENTER_VERTICAL | Gravity.START;
-                memLp.setMarginStart((int) (6 * density));
                 memView.setLayoutParams(memLp);
                 thermalRow1.addView(memView);
                 XposedBridge.log(TAG + ": Info RAM ditambahkan ke Line 1.");

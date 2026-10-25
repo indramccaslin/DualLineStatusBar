@@ -95,6 +95,7 @@ public class MemView extends TextView {
 
     /**
      * Memperbarui teks persentase RAM terpakai.
+     * Jika info suhu (ThermalView) tampil, tambahkan spasi pemisah agar konsisten (mis. 2 spasi).
      */
     public void updateDisplay() {
         if (!ModulePrefs.getBoolean(ModulePrefs.KEY_MEM_SHOW, true)) {
@@ -103,11 +104,23 @@ public class MemView extends TextView {
         }
         setVisibility(View.VISIBLE);
 
+        boolean showThermal = ModulePrefs.getBoolean(ModulePrefs.KEY_THERMAL_SHOW, true);
+        int numSpaces = ModulePrefs.getInt(ModulePrefs.KEY_THERMAL_SPACING, 2);
+
+        StringBuilder spaces = new StringBuilder();
+        if (showThermal) {
+            for (int i = 0; i < Math.max(1, numSpaces); i++) {
+                spaces.append(" ");
+            }
+        }
+
         int percent = readUsedPercent();
-        String text = (percent >= 0) ? ("RAM " + percent + "%") : "RAM --%";
+        String memText = (percent >= 0) ? ("RAM " + percent + "%") : "RAM --%";
+        String text = spaces.toString() + memText;
 
         SpannableStringBuilder ssb = new SpannableStringBuilder(text);
-        ssb.setSpan(new StyleSpan(Typeface.BOLD), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        int ramStart = spaces.length();
+        ssb.setSpan(new StyleSpan(Typeface.BOLD), ramStart, ramStart + 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         setText(ssb);
     }
 
