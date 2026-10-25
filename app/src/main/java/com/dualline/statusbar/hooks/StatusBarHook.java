@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.dualline.statusbar.ModulePrefs;
 import com.dualline.statusbar.ui.DateView;
 import com.dualline.statusbar.ui.MemView;
+import com.dualline.statusbar.ui.StorageView;
 import com.dualline.statusbar.ui.ThermalView;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -392,7 +393,7 @@ public class StatusBarHook {
             stackLp.gravity = Gravity.CENTER_VERTICAL | Gravity.END;
             rightStack.setLayoutParams(stackLp);
 
-            // === BARIS 1 (ATAS): Sinyal & Wi-Fi (Kanan) ===
+            // === BARIS 1 (ATAS): Storage (Paling Kiri) -> Wi-Fi -> Sinyal (Kanan) ===
             LinearLayout row1 = new LinearLayout(context);
             row1.setOrientation(LinearLayout.HORIZONTAL);
             row1.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
@@ -407,7 +408,22 @@ public class StatusBarHook {
             row1Lp.gravity = Gravity.CENTER_VERTICAL | Gravity.END;
             row1.setLayoutParams(row1Lp);
 
-            // Sinyal & Wi-Fi (StatusIconContainer)
+            // 1. StorageView (Info Memori Internal) di paling kiri Baris 1 Kanan
+            if (ModulePrefs.getBoolean(ModulePrefs.KEY_STORAGE_SHOW, true)) {
+                StorageView storageView = new StorageView(context);
+                storageView.setTag("dualline_storage_view");
+                storageView.setTranslationY(1.5f * density);
+                LinearLayout.LayoutParams storageLp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                storageLp.gravity = Gravity.CENTER_VERTICAL;
+                storageView.setLayoutParams(storageLp);
+                row1.addView(storageView);
+                XposedBridge.log(TAG + ": Info Storage ditambahkan ke Baris 1 Kanan (paling kiri).");
+            }
+
+            // 2. Sinyal & Wi-Fi (StatusIconContainer) di sebelah kanannya
             if (statusIcons != null) {
                 if (statusIcons.getParent() instanceof ViewGroup) {
                     ((ViewGroup) statusIcons.getParent()).removeView(statusIcons);

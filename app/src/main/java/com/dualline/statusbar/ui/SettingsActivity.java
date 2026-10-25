@@ -43,6 +43,7 @@ public class SettingsActivity extends Activity {
 
     private Switch switchThermalShow;
     private Switch switchMemShow;
+    private Switch switchStorageShow;
     private Spinner spinnerThermalFormat;
     private Spinner spinnerThermalSpacing;
     private Spinner spinnerThermalInterval;
@@ -93,6 +94,7 @@ public class SettingsActivity extends Activity {
 
         switchThermalShow = findViewById(R.id.switch_thermal_show);
         switchMemShow = findViewById(R.id.switch_mem_show);
+        switchStorageShow = findViewById(R.id.switch_storage_show);
         spinnerThermalFormat = findViewById(R.id.spinner_thermal_format);
         spinnerThermalSpacing = findViewById(R.id.spinner_thermal_spacing);
         spinnerThermalInterval = findViewById(R.id.spinner_thermal_interval);
@@ -173,6 +175,7 @@ public class SettingsActivity extends Activity {
             prefs.getFloat(ModulePrefs.KEY_THERMAL_SIZE_DP, 5.8f)
         );
         switchMemShow.setChecked(prefs.getBoolean(ModulePrefs.KEY_MEM_SHOW, true));
+        switchStorageShow.setChecked(prefs.getBoolean(ModulePrefs.KEY_STORAGE_SHOW, true));
 
         // Network Traffic & Icons
         switchNetTrafficShow.setChecked(prefs.getBoolean(ModulePrefs.KEY_NET_TRAFFIC_SHOW, true));
@@ -236,10 +239,15 @@ public class SettingsActivity extends Activity {
             ModulePrefs.fixPermissions(this);
         });
 
-        // Info RAM
+        // Info RAM & Storage
         switchMemShow.setOnCheckedChangeListener((v, isChecked) -> {
             if (isBinding) return;
             prefs.edit().putBoolean(ModulePrefs.KEY_MEM_SHOW, isChecked).commit();
+            ModulePrefs.fixPermissions(this);
+        });
+        switchStorageShow.setOnCheckedChangeListener((v, isChecked) -> {
+            if (isBinding) return;
+            prefs.edit().putBoolean(ModulePrefs.KEY_STORAGE_SHOW, isChecked).commit();
             ModulePrefs.fixPermissions(this);
         });
 

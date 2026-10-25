@@ -316,6 +316,15 @@
             android:paddingTop="4dp"
             android:paddingBottom="4dp" />
 
+        <Switch
+            android:id="@+id/switch_storage_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tampilkan Info Memori Internal / Storage (Line 1 Kanan)"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="20dp" />
+
         <!-- ============================================== -->
         <!-- SECTION 5: SINYAL, NETWORK & BATERAI -->
         <!-- ============================================== -->
