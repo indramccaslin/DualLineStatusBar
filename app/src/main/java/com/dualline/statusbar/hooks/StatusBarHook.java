@@ -431,6 +431,29 @@ public class StatusBarHook {
                 float statusScale = ModulePrefs.getFloat(ModulePrefs.KEY_STATUS_ICONS_SCALE, 0.70f);
                 statusIcons.setScaleX(statusScale);
                 statusIcons.setScaleY(statusScale);
+
+                // Paksa urutan ikon (Wi-Fi ke Kiri, Sinyal ke Kanan)
+                if (statusIcons instanceof ViewGroup) {
+                    ViewGroup vg = (ViewGroup) statusIcons;
+                    View wifiView = null;
+                    View signalView = null;
+                    int count = vg.getChildCount();
+                    for (int i = 0; i < count; i++) {
+                        View child = vg.getChildAt(i);
+                        String res = getResourceEntryName(child);
+                        if (res.contains("wifi")) wifiView = child;
+                        else if (res.contains("signal") || res.contains("mobile")) signalView = child;
+                    }
+
+                    if (wifiView != null && signalView != null) {
+                        vg.removeView(wifiView);
+                        vg.removeView(signalView);
+                        // Tambahkan Wi-Fi ke kiri, Sinyal ke kanan
+                        vg.addView(wifiView);
+                        vg.addView(signalView);
+                    }
+                }
+
                 LinearLayout.LayoutParams statusLp = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
