@@ -248,21 +248,6 @@ public class StatusBarHook {
             thermalView.setLayoutParams(thermalLp);
             thermalRow1.addView(thermalView);
 
-            // Baris 1: Info RAM (di samping kanan suhu)
-            if (ModulePrefs.getBoolean(ModulePrefs.KEY_MEM_SHOW, true)) {
-                MemView memView = new MemView(context);
-                memView.setTag("dualline_mem_view");
-                memView.setTranslationY(1.5f * density);
-                LinearLayout.LayoutParams memLp = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                );
-                memLp.gravity = Gravity.CENTER_VERTICAL | Gravity.START;
-                memView.setLayoutParams(memLp);
-                thermalRow1.addView(memView);
-                XposedBridge.log(TAG + ": Info RAM ditambahkan ke Line 1.");
-            }
-
             secondStack.addView(thermalRow1);
 
             // Baris 2: Ikon Notifikasi (Line 2 di samping kanan tanggal)
@@ -393,7 +378,7 @@ public class StatusBarHook {
             stackLp.gravity = Gravity.CENTER_VERTICAL | Gravity.END;
             rightStack.setLayoutParams(stackLp);
 
-            // === BARIS 1 (ATAS): Storage (Paling Kiri) -> Wi-Fi -> Sinyal (Kanan) ===
+            // === BARIS 1 (ATAS): RAM (Paling Kiri) -> DISK -> Wi-Fi -> Sinyal (Kanan) ===
             LinearLayout row1 = new LinearLayout(context);
             row1.setOrientation(LinearLayout.HORIZONTAL);
             row1.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
@@ -408,7 +393,22 @@ public class StatusBarHook {
             row1Lp.gravity = Gravity.CENTER_VERTICAL | Gravity.END;
             row1.setLayoutParams(row1Lp);
 
-            // 1. StorageView (Info Memori Internal) di paling kiri Baris 1 Kanan
+            // 1. MemView (Info RAM) di paling kiri Baris 1 Kanan
+            if (ModulePrefs.getBoolean(ModulePrefs.KEY_MEM_SHOW, true)) {
+                MemView memView = new MemView(context);
+                memView.setTag("dualline_mem_view");
+                memView.setTranslationY(1.5f * density);
+                LinearLayout.LayoutParams memLp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                memLp.gravity = Gravity.CENTER_VERTICAL;
+                memView.setLayoutParams(memLp);
+                row1.addView(memView);
+                XposedBridge.log(TAG + ": Info RAM ditambahkan ke Baris 1 Kanan (paling kiri).");
+            }
+
+            // 2. StorageView (Info DISK) di sebelah kanan RAM
             if (ModulePrefs.getBoolean(ModulePrefs.KEY_STORAGE_SHOW, true)) {
                 StorageView storageView = new StorageView(context);
                 storageView.setTag("dualline_storage_view");
@@ -420,7 +420,7 @@ public class StatusBarHook {
                 storageLp.gravity = Gravity.CENTER_VERTICAL;
                 storageView.setLayoutParams(storageLp);
                 row1.addView(storageView);
-                XposedBridge.log(TAG + ": Info Storage ditambahkan ke Baris 1 Kanan (paling kiri).");
+                XposedBridge.log(TAG + ": Info Storage (DISK) ditambahkan ke Baris 1 Kanan.");
             }
 
             // 2. Sinyal & Wi-Fi (StatusIconContainer) di sebelah kanannya

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.dualline.statusbar.ModulePrefs;
 
 import java.io.File;
+import java.util.Locale;
 
 /**
  * StorageView.java - Widget Info Storage (Internal Memory) untuk Baris 1 Kanan (Paling Kiri)
@@ -98,14 +99,16 @@ public class StorageView extends TextView {
         }
         setVisibility(View.VISIBLE);
 
-        int percent = readStorageUsedPercent();
-        String text = (percent >= 0) ? ("ROM " + percent + "%") : "ROM --%";
-
-        // Tambah spasi di belakang agar ada jarak dengan ikon Wi-Fi di sebelah kanannya (2 spasi)
-        text = text + "  ";
+        StorageInfo info = readStorageInfo();
+        String text;
+        if (info != null) {
+            text = String.format(Locale.US, "DISK %dGB/%dGB  ", info.usedGb, info.totalGb);
+        } else {
+            text = "DISK --GB/--GB  ";
+        }
 
         SpannableStringBuilder ssb = new SpannableStringBuilder(text);
-        ssb.setSpan(new StyleSpan(Typeface.BOLD), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ssb.setSpan(new StyleSpan(Typeface.BOLD), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         setText(ssb);
     }
 
@@ -113,7 +116,12 @@ public class StorageView extends TextView {
         setTextColor(color);
     }
 
-    private int readStorageUsedPercent() {
+    private static class StorageInfo {
+        long totalGb;
+        long usedGb;
+    }
+
+    private StorageInfo readStorageInfo() {
         try {
             File path = Environment.getDataDirectory();
             StatFs stat = new StatFs(path.getPath());
@@ -125,11 +133,13 @@ public class StorageView extends TextView {
             long available = availableBlocks * blockSize;
             long used = total - available;
 
-            if (total > 0) {
-                int percent = Math.round(used * 100f / total);
-                return Math.max(0, Math.min(100, percent));
-            }
+            long GB = 1024L * 1024L * 1024L;
+
+            StorageInfo info = new StorageInfo();
+            info.totalGb = total / GB;
+            info.usedGb = used / GB;
+            return info;
         } catch (Throwable ignored) {}
-        return -1;
+        return null;
     }
 }
